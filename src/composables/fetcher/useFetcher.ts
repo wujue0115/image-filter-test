@@ -20,10 +20,10 @@ export type FetcherFunction = (
   url: string,
   options?: FetcherOptions
 ) => Promise<FetcherResponse | Error>
-export type FetcherInstance = FetcherFunction & Partial<Record<FetcherMethod, FetcherFunction>>
+export type FetcherInstance = FetcherFunction & Record<FetcherMethod, FetcherFunction>
 
 const useFetcher = (baseOptions: FetcherOptions = {}): FetcherInstance => {
-  const fetcher: FetcherInstance = async (url: string, options: FetcherOptions = {}) => {
+  const fetcher = async (url: string, options: FetcherOptions = {}) => {
     const mergedOptions: FetcherOptions = {
       ...baseOptions,
       ...options
@@ -51,7 +51,7 @@ const useFetcher = (baseOptions: FetcherOptions = {}): FetcherInstance => {
 
   const methods: FetcherMethod[] = ['get', 'post', 'put', 'patch', 'delete']
   methods.forEach((method) => {
-    fetcher[method] = async (url: string, options: FetcherOptions = {}) => {
+    ;(fetcher as FetcherInstance)[method] = async (url: string, options: FetcherOptions = {}) => {
       const mergedOptions: FetcherOptions = {
         ...options,
         method
@@ -60,7 +60,7 @@ const useFetcher = (baseOptions: FetcherOptions = {}): FetcherInstance => {
     }
   })
 
-  return fetcher
+  return fetcher as FetcherInstance
 }
 
 export { useFetcher }
