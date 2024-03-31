@@ -64,6 +64,7 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const useAPI: typeof import('./composables/api/useAPI')['useAPI']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCounterStore: typeof import('./stores/counter')['useCounterStore']
   const useCssModule: typeof import('vue')['useCssModule']

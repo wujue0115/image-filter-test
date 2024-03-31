@@ -1,21 +1,26 @@
-interface FetcherResponse<TData = any> extends Response {
+export interface FetcherResponse<TData = any> extends Response {
   data?: TData
 }
 
-type FetcherInterceptor<TRequest = RequestInit, TResponse = Response, TError = Error> = {
+export type FetcherInterceptor<TRequest = RequestInit, TResponse = Response, TError = Error> = {
   onRequest?: (options: TRequest) => Promise<TRequest>
   onResponse?: (response: TResponse) => Promise<TResponse>
   onError?: (error: TError) => Promise<TError>
 }
 
-interface FetcherOptions extends FetcherInterceptor<FetcherOptions, FetcherResponse>, RequestInit {
+export interface FetcherOptions
+  extends FetcherInterceptor<FetcherOptions, FetcherResponse>,
+    RequestInit {
   baseURL?: string
   query?: Record<string, any>
 }
 
-type FetcherMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
-type FetcherFunction = (url: string, options?: FetcherOptions) => Promise<FetcherResponse | Error>
-type FetcherInstance = FetcherFunction & Partial<Record<FetcherMethod, FetcherFunction>>
+export type FetcherMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
+export type FetcherFunction = (
+  url: string,
+  options?: FetcherOptions
+) => Promise<FetcherResponse | Error>
+export type FetcherInstance = FetcherFunction & Partial<Record<FetcherMethod, FetcherFunction>>
 
 const useFetcher = (baseOptions: FetcherOptions = {}): FetcherInstance => {
   const fetcher: FetcherInstance = async (url: string, options: FetcherOptions = {}) => {
