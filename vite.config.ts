@@ -14,12 +14,13 @@ export default defineConfig({
     VueDevTools(),
     UnoCSS(),
     AutoImport({
-      // include: [
-      //   /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-      //   /\.vue$/,
-      //   /\.vue\?vue/ // .vue
-      // ],
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/ // .vue
+      ],
       imports: ['vue', 'vue-router', 'pinia'],
+      dirs: ['./src/composables/**', './src/stores/**'],
       dts: 'src/auto-imports.d.ts'
     }),
     Components({})
