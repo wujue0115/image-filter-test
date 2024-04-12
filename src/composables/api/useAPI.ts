@@ -1,6 +1,4 @@
-import type { FetcherOptions, FetcherResponse, FetcherInterceptor } from '../fetcher/useFetcher.ts'
-
-const REMINI_API_KEY = import.meta.env.VITE_REMINI_API_KEY
+import type { FetcherResponse, FetcherInterceptor } from '../fetcher/useFetcher.ts'
 
 const baseInterceptors: FetcherInterceptor = {
   async onResponse(response: FetcherResponse) {
@@ -12,35 +10,16 @@ const baseInterceptors: FetcherInterceptor = {
 }
 
 const baseAPIOptions = {
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   ...baseInterceptors
-}
-
-const reminiAPIOptions = {
-  baseURL: 'https://developer.remini.ai/api',
-  ...baseInterceptors,
-  async onRequest(options: FetcherOptions) {
-    const newOptions = { ...options }
-
-    newOptions.headers = {
-      ...newOptions.headers,
-      Authorization: `Bearer ${REMINI_API_KEY}`
-    } as Record<string, string>
-
-    return newOptions
-  }
 }
 
 const api = useFetcher({
   ...baseAPIOptions
 })
 
-const reminiAPI = useFetcher({
-  ...reminiAPIOptions
-})
-
 const useAPI = () => ({
-  api,
-  reminiAPI
+  api
 })
 
 export { useAPI }

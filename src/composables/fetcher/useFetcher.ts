@@ -1,11 +1,11 @@
-export interface FetcherResponse<TData = any> extends Response {
-  data?: TData
+export interface FetcherResponse<T = any> extends Response {
+  data?: T
 }
 
-export type FetcherInterceptor<TRequest = RequestInit, TResponse = Response, TError = Error> = {
-  onRequest?: (options: TRequest) => Promise<TRequest>
-  onResponse?: (response: TResponse) => Promise<TResponse>
-  onError?: (error: TError) => Promise<TError>
+export type FetcherInterceptor<Req = RequestInit, Res = Response, Err = Error> = {
+  onRequest?: (options: Req) => Promise<Req>
+  onResponse?: (response: Res) => Promise<Res>
+  onError?: (error: Err) => Promise<Err>
 }
 
 export interface FetcherOptions
@@ -16,10 +16,10 @@ export interface FetcherOptions
 }
 
 export type FetcherMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
-export type FetcherFunction = (
+export type FetcherFunction<T = any> = (
   url: string,
   options?: FetcherOptions
-) => Promise<FetcherResponse | Error>
+) => Promise<FetcherResponse<T> | Error>
 export type FetcherInstance = FetcherFunction & Record<FetcherMethod, FetcherFunction>
 
 const useFetcher = (baseOptions: FetcherOptions = {}): FetcherInstance => {

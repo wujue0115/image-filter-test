@@ -1,8 +1,41 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const uploadImage = () => {
+  return new Promise((resolve, reject) => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          resolve(file)
+        }
+        reader.onerror = (e) => {
+          reject(e)
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+    input.click()
+  })
+}
+
+const handleClick = async (type) => {
+  const imageFile = await uploadImage()
+  if (imageFile instanceof File) {
+    const { filterImage } = useReminiStore()
+
+    const res = await filterImage(imageFile)
+
+    console.warn(res)
+  }
+}
+</script>
 
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh>
-    <div absolute top-0 left="[354px]" w-3px h-full bg-white></div>
+    <div absolute top-0 left="[350px]" w-3px h-full bg-white></div>
 
     <div flex h-full text-white>
       <div flex flex-col justify-center items-center ml="[50%]" box-border w-full h-full>
@@ -14,19 +47,54 @@
           </p>
           <div mt-8 w="80%" grid grid-cols-2 rounded-3xl border="3 solid #fff" bg="#0005">
             <div mt-6 flex justify-center>
-              <WButtom :content="'A'" w="80px" text-center bg-red></WButtom>
+              <WButtom
+                :content="'A'"
+                @click="handleClick('A')"
+                type
+                w="80px"
+                text-center
+                bg-red
+              ></WButtom>
             </div>
             <div mt-6 flex justify-center>
-              <WButtom :content="'B'" w="80px" text-center bg-red></WButtom>
+              <WButtom
+                :content="'B'"
+                @click="handleClick('B')"
+                type
+                w="80px"
+                text-center
+                bg-red
+              ></WButtom>
             </div>
             <div mt-6 flex justify-center>
-              <WButtom :content="'C'" w="80px" text-center bg-red></WButtom>
+              <WButtom
+                :content="'C'"
+                @click="handleClick('C')"
+                type
+                w="80px"
+                text-center
+                bg-red
+              ></WButtom>
             </div>
             <div mt-6 flex justify-center>
-              <WButtom :content="'D'" w="80px" text-center bg-red></WButtom>
+              <WButtom
+                :content="'D'"
+                @click="handleClick('D')"
+                type
+                w="80px"
+                text-center
+                bg-red
+              ></WButtom>
             </div>
             <div my-6 flex justify-center>
-              <WButtom :content="'E'" w="80px" text-center bg-red></WButtom>
+              <WButtom
+                :content="'E'"
+                @click="handleClick('E')"
+                type
+                w="80px"
+                text-center
+                bg-red
+              ></WButtom>
             </div>
           </div>
         </div>
@@ -39,7 +107,6 @@
 .main {
   background-image: url('../assets/home.jpg');
   background-size: cover;
-  background-position: left;
   background-repeat: no-repeat;
 }
 </style>
