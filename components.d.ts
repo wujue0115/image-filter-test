@@ -7,10 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Buttom: typeof import('./src/components/atoms/Buttom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TButtom: typeof import('./src/components/TButtom.vue')['default']
     WButtom: typeof import('./src/components/atoms/WButtom.vue')['default']
   }
 }
