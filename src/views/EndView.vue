@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const isPro = ref(true)
+</script>
 
 <template>
   <main class="main" relative box-border w-full h-100vh bg-black>
@@ -19,43 +21,27 @@
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
-            <img src="https://picsum.photos/500/200" rounded-t-3xl alt="" />
+            <img src="../assets/endBg.png" rounded-t-3xl max-w-lg alt="" />
           </div>
 
           <div flex flex-col m-3>
             <div m-auto>
-              <WButtom
-                :content="'pro'"
-                @click="handleClick('A')"
-                type
-                w="80px"
-                text-center
-                bg-red
-              ></WButtom>
+              <div class="flex flex-row">
+                <div  border="3 solid #ddd" cursor-pointer w-40 p-1 text-center rounded-3xl color-black   @click="isPro = !isPro" :class="{ 'bg-gray-500 color-white': isPro }">PRO</div>
+                <div  border="3 solid #ddd" cursor-pointer w-40 p-1 text-center  rounded-3xl  color-black rounded-l-xl  border-l-transparent @click="isPro = !isPro" :class="{ 'bg-gray-500  color-white': !isPro }">LITE</div>
+              </div>
+            
             </div>
-            <div m-2 flex flex-col justify-center items-center>
-              <WButtom
-                :content="'每年'"
-                @click="handleClick('A')"
-                type
-                w="80px"
-                text-center
-                m-1
-                text-black
-                bg-white
-                border="1 solid #000"
-              ></WButtom>
-              <WButtom
-                :content="'每月'"
-                @click="handleClick('A')"
-                type
-                w="80px"
-                text-center
-                text-black
-                bg-white
-                border="1 solid #000"
-              ></WButtom>
+            <div m-2 flex flex-col justify-center items-center >
+              <img v-if="isPro" src="../assets/LiteYear.png"  max-w-md btn-base bg-white alt="" />
+              <img v-else src="../assets/ProYear.png"  max-w-md btn-base bg-white alt="" />
+              <img v-if="isPro" src="../assets/LiteMonth.png" max-w-md  btn-base bg-white alt="" />
+              <img v-else src="../assets/ProMonth.png" max-w-md  btn-base bg-white alt="" />
             </div>
+            <!-- <div m-2 flex flex-col justify-center items-center v-else>
+              <img src="../assets/ProYear.png"  max-w-md btn-base bg-white alt="" />
+              <img src="../assets/ProMonth.png" max-w-md  btn-base bg-white alt="" />
+            </div> -->
             <div p-3 flex justify-around>
               <WButtom
                 :content="'繼續'"
