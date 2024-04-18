@@ -10,5 +10,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     WButtom: typeof import('./src/components/atoms/WButtom.vue')['default']
+    WPanzoom: typeof import('./src/components/atoms/WPanzoom.vue')['default']
   }
 }
