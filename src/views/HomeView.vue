@@ -1,4 +1,6 @@
 <script setup lang="ts">
+
+const router = useRouter()
 const uploadImage = () => {
   return new Promise((resolve, reject) => {
     const input = document.createElement('input')
@@ -29,7 +31,14 @@ const handleClick = async (type) => {
     const res = await filterImage(imageFile)
 
     console.warn(res)
+     router.push({
+    name: `${type}part`,
+    // params: name
+})
+   
   }
+  
+
 }
 </script>
 

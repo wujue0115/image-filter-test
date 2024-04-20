@@ -71,6 +71,7 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useFetcher: typeof import('./composables/fetcher/useFetcher')['useFetcher']
   const useLink: typeof import('vue-router')['useLink']
+  const usePanzoom: typeof import('./composables/utils/usePanzoom')['usePanzoom']
   const useReminiStore: typeof import('./stores/remini')['useReminiStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
