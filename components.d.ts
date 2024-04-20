@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    PopOut: typeof import('./src/components/atoms/popOut.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     WButtom: typeof import('./src/components/atoms/WButtom.vue')['default']
