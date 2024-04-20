@@ -5,7 +5,7 @@ const src = ref<string>('null')
 const panzoomRef = ref<HTMLElement | null>(null)
   // const range = ref<HTMLInputElement>(null)
 const panzoom = ref<any>(null)
-
+const isOpen = ref(false)
 onMounted(() => {
   console.log(route.query)
 
@@ -22,11 +22,12 @@ const handleZoomOut = () => {
   panzoom.value.zoomOut()
 }
 const handleInput = (e) => {
-  console.log(e);
-  
+  // console.log(e);
+  panzoom.value.reset()
   panzoom.value.zoom(e.target.valueAsNumber)
 }
 const handleChange = (e) => {
+  panzoom.value.reset()
   panzoom.value.zoom(e.target.valueAsNumber)
 }
 const handleClick =  () => {
@@ -36,7 +37,7 @@ const handleClick =  () => {
 
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
-      <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="handleClick"/>
+      <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
     
   <div h-screen pt-4 flex flex-col sjustify-center items-center>
     <div class="max-h-[70%] max-w-[50%]">
@@ -61,5 +62,6 @@ const handleClick =  () => {
   <WButtom mx-2 content="+" @click="handleZoomIn" />
 </div>
   </div>
+  <popOut v-if="isOpen"     @action-close="isOpen = !isOpen"/>
 </main>
 </template>

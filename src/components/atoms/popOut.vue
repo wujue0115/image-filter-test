@@ -3,11 +3,10 @@ const isPro = ref(true)
 </script>
 
 <template>
-  <main class="main" relative box-border w-full h-100vh bg-black font-sans>
-    <div flex h-full text-white>
+    <div h-full text-white absolute class="left-30% top-2%">
       <div flex flex-col justify-center items-center box-border w-full h-full>
         <div rounded-3xl bg-white>
-          <div  relative class="myImg"  w-530px  min-h-52 >
+          <div  relative class="myImg"  w-530px  min-h-52  @click="$emit('actionClose')">
             <svg
               absolute
               top-2
@@ -39,10 +38,10 @@ const isPro = ref(true)
             
             </div>
             <div my-3 flex flex-col justify-center items-center min-h-36 >
-              <img  v-if="isPro" src="../assets/LiteYear.png" my-1  w-md btn-base bg-white alt="" />
-              <img v-else src="../assets/ProYear.png" my-1 w-md btn-base bg-white alt="" />
-              <img v-if="isPro" src="../assets/LiteMonth.png" my-1 w-md  btn-base bg-white alt="" />
-              <img v-else src="../assets/ProMonth.png" my-1 w-md  btn-base bg-white alt="" />
+              <img  v-if="isPro" src="../../assets/LiteYear.png" my-1  w-md btn-base bg-white alt="" />
+              <img v-else src="../../assets/ProYear.png" my-1 w-md btn-base bg-white alt="" />
+              <img v-if="isPro" src="../../assets/LiteMonth.png" my-1 w-md  btn-base bg-white alt="" />
+              <img v-else src="../../assets/ProMonth.png" my-1 w-md  btn-base bg-white alt="" />
             </div>
             <!-- <div m-2 flex flex-col justify-center items-center v-else>
               <img src="../assets/ProYear.png"  max-w-md btn-base bg-white alt="" />
@@ -70,14 +69,14 @@ const isPro = ref(true)
         </div>
       </div>
     </div>
-  </main>
+  
 </template>
 
 <style>
 .myImg{
   background-position: center top;
   background-size: cover;
-  background-image: url( ../assets/endBg.png);
+  background-image: url( ../../assets/endBg.png);
 
 }
 </style>
