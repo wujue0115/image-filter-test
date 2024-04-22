@@ -41,7 +41,7 @@ const handleClick =  () => {
     
   <div h-screen pt-4 flex flex-col sjustify-center items-center>
     <div class="max-h-[70%] max-w-[50%]">
-      <div ref="panzoomRef" m-auto>
+      <div ref="panzoomRef" m-auto class="watermarked">
         <img src="../assets/demo.png" alt="" w-full h-auto object-cover  />
       </div>
     </div>
