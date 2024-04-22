@@ -46,9 +46,9 @@ const handleClick =  () => {
       <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
     
   <div h-screen pt-4 flex flex-col sjustify-center items-center>
-    <div class="h-[60%] w-[50%]">
-      <div ref="panzoomRef" m-auto>
-        <img src="../assets/demo.png" alt="" w-full h-auto object-cover  />
+    <div class="max-w-[80%] max-h-[70%] " >
+      <div ref="panzoomRef" class="frame">
+        <img src="../assets/demo.png" alt=""  max-w-full max-h-full />
       </div>
     </div>
 
@@ -63,7 +63,7 @@ const handleClick =  () => {
     min="0.1"
     max="5"
     step="0.1"
-    
+    defaultValue="1"
   />
   <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
 </div>
@@ -71,3 +71,21 @@ const handleClick =  () => {
   <popOut v-if="isOpen"    @action-close="isOpen = !isOpen"/>
 </main>
 </template>
+<style>
+.frame {  
+  height: 70vh; /*can be anything*/
+  width: 80vw; /*can be anything*/
+  position: relative;
+}
+img {  
+  max-height: 100%;  
+  max-width: 100%; 
+  width: auto;
+  height: auto;
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;
+}</style>
