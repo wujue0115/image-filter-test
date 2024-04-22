@@ -72,20 +72,4 @@ const handleClick =  () => {
 </main>
 </template>
 <style>
-.frame {  
-  height: 70vh; /*can be anything*/
-  width: 80vw; /*can be anything*/
-  position: relative;
-}
-img {  
-  max-height: 100%;  
-  max-width: 100%; 
-  width: auto;
-  height: auto;
-  position: absolute;  
-  top: 0;  
-  bottom: 0;  
-  left: 0;  
-  right: 0;  
-  margin: auto;
-}</style>
+</style>
