@@ -3,14 +3,14 @@ const isPro = ref(true)
 </script>
 
 <template>
-    <div h-full text-white absolute class="left-30% top-2%">
+    <div h-full text-white absolute class="left-30% top-2%" z-999>
       <div flex flex-col justify-center items-center box-border w-full h-full>
         <div rounded-3xl bg-white>
           <div  relative class="myImg"  w-530px  min-h-52  @click="$emit('actionClose')">
             <svg
               absolute
               top-2
-              left-2
+              right-2
               cursor-pointer
               z-10
               xmlns="http://www.w3.org/2000/svg"
