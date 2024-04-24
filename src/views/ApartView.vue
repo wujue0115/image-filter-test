@@ -48,58 +48,18 @@ import { useElementSize, useMouseInElement } from '@vueuse/core'
 const target = ref(null)
 const mouse = reactive(useMouseInElement(target))
 const el = ref(null)
-const el2 = ref(null)
+// const el2 = ref(null)
 
 const { width, height } = useElementSize(el)
-const { width2, height2 } = useElementSize(el2)
-const { x, y, isOutside, elementX } = useMouseInElement(target)
+// const { x, y, isOutside, elementX } = useMouseInElement(target)
 
-const myContainer = document.querySelector(".myContainer");
-const line = document.querySelector(".line");
-const img1 = document.querySelector(".img1");
-const img2 = document.querySelector(".img2");
-
-const getMousePosition = (event, target) => {
-  let targetElement = event.target;
-  let offsetTop = 0;
-  let offsetLeft = 0;
-
-  while (targetElement !== target) {
-    offsetTop += targetElement.offsetTop;
-    offsetLeft += targetElement.offsetLeft;
-    while (targetElement !== target) {
-      targetElement = targetElement.parentElement;
-      if (
-        window
-        .getComputedStyle(targetElement)
-        .getPropertyValue("position") !== "static"
-      ) {
-        break;
-      }
-    }
-  }
-
-  return { x: event.offsetX + offsetLeft, y: event.offsetY + offsetTop };
-}
-
-const moveLine = (e) => {
-  let { x } = getMousePosition(e, myContainer);
-  
-  const halfLine = (line.offsetWidth >> 1);
-  
-  x = Math.max(Math.min(x, myContainer.offsetWidth - halfLine), halfLine);
-
-  line.style.cursor = "none";
-  line.style.left = x - halfLine + "px";
-  
-  const left = x;
-  const right = myContainer.offsetWidth - left;
-  
-  img1.style.width = left + "px";
-  img2.style.width = right + "px";
-  console.log("hello");
-  
-}
+const elLine = ref<HTMLElement | null>(null)
+  import { useDraggable } from '@vueuse/core'
+// const elLine = ref<HTMLElement | null>(null)
+// `style` will be a helper computed for `left: ?px; top: ?px;`
+const { x, y, style } = useDraggable(elLine, {
+  initialValue: { x: 600, y:64 },
+})
 
 console.log(width);
 
@@ -122,12 +82,11 @@ watch(mouse, (newValue,oldValue)=>{
   
 }
 })
-if( mouse.isOutside){
-  console.log("isOutside");
-  moveLine
+// if( mouse.isOutside){
+//   console.log("isOutside");
   
   
-}
+// }
 
 // container.useEventListener("mouseenter", () => {
 //   container.useEventListener("mousemove", moveLine);
@@ -142,14 +101,24 @@ if( mouse.isOutside){
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
       <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
-
-  <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target el2" >
+      
+  <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target" >
+    <div ref="elLine"  :style="style" fixed bg-red z-100  w-auto h="75vh">
+      <img src="../assets/svg4.svg" absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
+      <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="right-55%">before</button>
+      <!-- <hr width="1px" h-full/> -->
+      <div class="line"></div>
+      <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="left-45%">after</button>
+    </div>
     <div>
+      
       <div ref="panzoomRef" class="frame wrapper">
-        <img src="../assets/demo.png" alt="" class="img1"  ref="el"  />
-        <div class="line" :style="{left: x - width/2 + 'px', transform: `translateX(${width}px)`}"></div>
+        <img src="../assets/home.jpg" alt="" class="img1"  ref="el"  />
+       
+        <!-- <div class="line" :style="{left: x - width/2 + 'px', transform: `translateX(${width}px)`}"></div> -->
         <div class="wrapper frame" >
-          <img class="img2 !left-auto" src="../assets/demo.png" :style="{transform: `translateX(${-width/2}px)` ,width: width - x  + 'px' }" >
+        <img class="img2 !left-auto" src="../assets/home.jpg" :style="{transform: `translateX(${-width/2}px)` ,width: width - x + width/2 + 120 +'px' , maxWidth: width + 'px'}"> 
+          
         </div>
       </div>
       
@@ -171,15 +140,14 @@ if( mouse.isOutside){
   />
   <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
 </div>
+
   <div  absolute bottom-10px left-10px bg-red w-auto h-20px>
     <!-- <h1>Hello world {{ x }} {{ y }}
       {{ isOutside }}</h1> -->
       <p>  width: {{  width }}
       
         height: {{  height }}  
-      
-        x: {{ x }}
-        y: {{ y }}
+  
         {{ isOutside }}
         {{ elementX }}
       </p>
@@ -222,6 +190,7 @@ if( mouse.isOutside){
 }
 
 .img2 {
-  object-position: left;
+  object-position:center;
+  object-fit: contain;
 }
 </style>

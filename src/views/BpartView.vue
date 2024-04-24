@@ -46,6 +46,7 @@ const handleClick =  () => {
       <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
     
   <div h-screen pt-4 flex flex-col sjustify-center items-center>
+    
     <div class="max-w-[80%] max-h-[70%] " >
       <div ref="panzoomRef" class="frame  watermarked">
           <img src="../assets/demo.png" alt=""  max-w-full max-h-full />

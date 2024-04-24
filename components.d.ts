@@ -7,9 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/atoms/WButtom copy.vue')['default']
     PopOut: typeof import('./src/components/atoms/popOut.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     WButtom: typeof import('./src/components/atoms/WButtom.vue')['default']
+    WLine: typeof import('./src/components/atoms/WLine.vue')['default']
   }
 }
