@@ -62,41 +62,7 @@ const { x, y, style } = useDraggable(elLine, {
   initialValue: { x: 600, y:64 },
 })
 
-console.log(width);
 
-watch(mouse, (newValue,oldValue)=>{
-  // if(mouse.isOutside){
-    //   console.log("helllo");
-   
-    
-  // }
-  
-  let halfX = ref(width.value * 1/2)
-  if(mouse.x > halfX.value){
-  console.log("halfx");
-  // const left = x;
-  // const right = x - left;
-  // img1.style.width = left + "px";
-  // img2.style.width = right + "px";
-}else{
-  console.log("not");
-  
-}
-})
-// if( mouse.isOutside){
-//   console.log("isOutside");
-  
-  
-// }
-
-// container.useEventListener("mouseenter", () => {
-//   container.useEventListener("mousemove", moveLine);
-// })
-
-// container.useEventListener("mouseleave", () => {
-//   line.style.cursor = "default";
-//   container.removeEventListener("mousemove", moveLine);
-// })
 </script>
 
 <template>

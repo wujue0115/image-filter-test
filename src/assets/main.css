@@ -42,3 +42,38 @@ body {
   right: 0;  
   margin: auto;
 }
+.myContainer {
+  position: relative;
+ 
+  user-select: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  z-index: 1;
+  width: 2px;
+  height: 100%;
+  left: 30%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.wrapper {
+  img {
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.img1 {
+  width: 30%;
+  object-position: left;
+}
+
+.img2 {
+  object-position:center;
+  object-fit: contain;
+}
