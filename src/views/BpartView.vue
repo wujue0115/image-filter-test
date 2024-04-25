@@ -100,7 +100,7 @@ watch(mouse, (newValue,oldValue)=>{
 
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
-      <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
+    <DownloadButtom  @click="isOpen = !isOpen"/>
       
   <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target" >
     <div ref="elLine"  :style="style" fixed bg-red z-100  w-auto h="75vh">

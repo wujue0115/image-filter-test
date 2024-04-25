@@ -55,6 +55,7 @@ const { width, height } = useElementSize(el)
 
 const elLine = ref<HTMLElement | null>(null)
   import { useDraggable } from '@vueuse/core'
+import DownloadButtom from '@/components/atoms/DownloadButtom.vue';
 // const elLine = ref<HTMLElement | null>(null)
 // `style` will be a helper computed for `left: ?px; top: ?px;`
 const { x, y, style } = useDraggable(elLine, {
@@ -100,7 +101,7 @@ watch(mouse, (newValue,oldValue)=>{
 
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
-      <WButtom absolute top-5 right-5 mx-2 content="Download" bg-pink-500 color-white @click="isOpen = !isOpen"/>
+      <DownloadButtom  @click="isOpen = !isOpen"/>
       
   <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target" >
     <div ref="elLine"  :style="style" fixed bg-red z-100  w-auto h="75vh">
@@ -141,16 +142,12 @@ watch(mouse, (newValue,oldValue)=>{
   <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
 </div>
 
-  <div  absolute bottom-10px left-10px bg-red w-auto h-20px>
+  <div  absolute bottom-10px left-20px  w-auto h-20px color-white  font-bold inline>
     <!-- <h1>Hello world {{ x }} {{ y }}
       {{ isOutside }}</h1> -->
-      <p>  width: {{  width }}
-      
-        height: {{  height }}  
+      <p inline text-lg text-color-zinc-400>  Width: </p> <p inline>{{  Math.floor(width) }} px </p> &nbsp;
+      <p inline text-lg text-color-zinc-400>  Height: </p><p inline>{{  Math.floor(height) }} px </p>
   
-        {{ isOutside }}
-        {{ elementX }}
-      </p>
 
 </div>
   </div>
