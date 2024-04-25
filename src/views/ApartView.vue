@@ -104,8 +104,8 @@ watch(mouse, (newValue,oldValue)=>{
       <DownloadButtom  @click="isOpen = !isOpen"/>
       
   <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target" >
-    <div ref="elLine"  :style="style" fixed bg-red z-100  w-auto h="75vh">
-      <img src="../assets/svg4.svg" absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
+    <div ref="elLine" class="!top-64px"  :style="style" fixed bg-red z-100  w-auto h="75vh" cursor-pointer>
+      <img src="../assets/svg4.svg" cursor-pointer absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
       <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="right-55%">before</button>
       <!-- <hr width="1px" h-full/> -->
       <div class="line"></div>
