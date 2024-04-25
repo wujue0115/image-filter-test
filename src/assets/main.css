@@ -20,10 +20,10 @@ body {
   top: 0px;
   left: 0px;
   background-image: url("../assets/watermark.png");
-  background-size: 250px 250px;
+  background-size: 100px 100px;
   background-position: 30px 30px;
-  background-repeat: repeat;
-  opacity: 0.8;
+  background-repeat: no-repeat;
+  opacity: 0.7;
 }
 .frame {  
   height: 70vh; /*can be anything*/
@@ -41,4 +41,39 @@ body {
   left: 0;  
   right: 0;  
   margin: auto;
+}
+.myContainer {
+  position: relative;
+ 
+  user-select: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  z-index: 1;
+  width: 2px;
+  height: 100%;
+  left: 30%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.wrapper {
+  img {
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.img1 {
+  width: 30%;
+  object-position: left;
+}
+
+.img2 {
+  object-position:center;
+  object-fit: contain;
 }
