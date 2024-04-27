@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 const route = useRoute()
-
 // 放大縮小功能 
 const src = ref<string>('null')
 const panzoomRef = ref<HTMLElement | null>(null)
@@ -69,7 +68,7 @@ const { x, y, style } = useDraggable(elLine, {
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
       <DownloadButtom  @click="isOpen = !isOpen"/>
       
-  <div pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer" ref="target" >
+  <div ref="target" pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer"  >
     <div ref="elLine" class="!top-64px"  :style="style" fixed bg-red z-100  w-auto h="75vh" cursor-pointer>
       <img src="../assets/svg4.svg" cursor-pointer absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
       <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="right-55%">before</button>
@@ -77,6 +76,7 @@ const { x, y, style } = useDraggable(elLine, {
       <div class="line"></div>
       <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="left-45%">after</button>
     </div>
+
     <div>
       
       <div ref="panzoomRef" class="frame wrapper">
