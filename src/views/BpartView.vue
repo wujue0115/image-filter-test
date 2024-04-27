@@ -8,13 +8,8 @@ const range = ref<HTMLInputElement>(null)
 const panzoom = ref<any>(null)
 const isOpen = ref(false)
 onMounted(() => {
-  console.log(route.query)
-
   src.value = route.query.image as string
-
   panzoom.value = usePanzoom(panzoomRef.value!)
-
-  
 })
 
 const handleZoomIn = () => {

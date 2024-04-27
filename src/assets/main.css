@@ -7,6 +7,12 @@ html { overflow-y:hidden; }
 body {
   background: #000;
 }
+.myContainer {
+  position: relative;
+  user-select: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
 .watermarked {
   position: relative;
 }

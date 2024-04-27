@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute()
-// 放大縮小功能 
+// 放大縮小功能
 const src = ref<string>('null')
 const panzoomRef = ref<HTMLElement | null>(null)
 const range = ref<HTMLInputElement>(null)
@@ -8,6 +8,8 @@ const panzoom = ref<any>(null)
 const isOpen = ref(false)
 const myWidth = ref(null)
 onMounted(() => {
+  src.value = route.query.image as string
+  panzoom.value = usePanzoom(panzoomRef.value!)
   myWidth.value = useMyWindowSize(myWidth)
 })
 
@@ -21,102 +23,129 @@ const handleZoomOut = () => {
   range.value.valueAsNumber = panzoom.value.getScale()
 }
 const handleInput = (e) => {
-  // console.log(e);
   panzoom.value.zoom(e.target.valueAsNumber)
 }
 const handleChange = (e) => {
-  // panzoom.value.reset()
   panzoom.value.zoom(e.target.valueAsNumber)
 }
-const handleClick =  () => {
- console.log("handleClick");
-}
-
 
 // 滑桿功能
 import { ref } from 'vue'
-import { useElementSize, useMouseInElement, useDraggable } from '@vueuse/core'
-import DownloadButtom from '@/components/atoms/DownloadButtom.vue';
+import { useElementSize, useDraggable } from '@vueuse/core'
+import DownloadButtom from '@/components/atoms/DownloadButtom.vue'
 const target = ref(null)
-const mouse = reactive(useMouseInElement(target))
 const el = ref(null)
 const initialX = computed(() => {
-  return myWidth.value/2
+  return myWidth.value / 2
 })
 
 const { width, height } = useElementSize(el)
 
 const elLine = ref<HTMLElement | null>(null)
 const { x, y, style } = useDraggable(elLine, {
-  initialValue: { x: initialX, y:64 },
+  initialValue: { x: initialX, y: 64 }
 })
-
-
 </script>
 
 <template>
   <main class="main" relative box-border pt-16 w-full h-100vh font-sans>
-      <DownloadButtom  @click="isOpen = !isOpen"/>
-      
-  <div ref="target" pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer"  >
-    
-    <div ref="elLine" class="!top-64px"  :style="style" fixed bg-red z-100  w-auto h="75vh" cursor-pointer>
-      <img src="../assets/svg4.svg" cursor-pointer absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
-      <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="right-55%">before</button>
-      <div class="line"></div>
-      <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="left-45%">after</button>
-    </div>
+    <DownloadButtom @click="isOpen = !isOpen" />
 
-    <div>
-      
-      <div ref="panzoomRef" class="frame wrapper ">
-        <img src="../assets/demo.png" alt="" class="img1"  ref="el"  />
-       
-        <div class="wrapper frame" >
-        <img class="img2" src="https://fakeimg.pl/2880x2160/E0E0E0/000"  :style="{ '--liner': (x * 100) / myWidth + '%' }"> 
-          
+    <div ref="target" pt-4 flex flex-col justify-center items-center class="h-[90%] myContainer">
+      <div
+        ref="elLine"
+        class="!top-64px"
+        :style="style"
+        fixed
+        bg-red
+        z-100
+        w-auto
+        h="75vh"
+        cursor-pointer
+      >
+        <img
+          src="../assets/svg4.svg"
+          cursor-pointer
+          absolute
+          class="bottom-[20%] right-[-15px]"
+          w-30px
+          h-30px
+        />
+        <button
+          border-0
+          rounded-3xl
+          bg-black
+          color-white
+          py-2
+          px-5
+          absolute
+          mx-5
+          top-15
+          class="right-55%"
+        >
+          before
+        </button>
+        <div class="line"></div>
+        <button
+          border-0
+          rounded-3xl
+          bg-black
+          color-white
+          py-2
+          px-5
+          absolute
+          mx-5
+          top-15
+          class="left-45%"
+        >
+          after
+        </button>
+      </div>
+
+      <div>
+        <div ref="panzoomRef" class="frame wrapper">
+          <img src="../assets/demo.png" alt="" class="img1" ref="el" />
+
+          <div class="wrapper frame">
+            <img
+              class="img2"
+              src="https://fakeimg.pl/2880x2160/E0E0E0/000"
+              :style="{ '--liner': (x * 100) / myWidth + '%' }"
+            />
+          </div>
         </div>
       </div>
-      
-     
-    </div>
 
-    <div mt-6 flex justify-center content-center>
-    <WButtom class="!text-3xl"  bg-black color-white content="-" @click="handleZoomOut" />
-    <input
-    ref="range"
-    @input="handleInput"
-    @Change="handleChange"
-    class="range-input"
-    type="range"
-    min="0.1"
-    max="5"
-    step="0.1"
-    defaultValue="1"
-  />
-  <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
-</div>
+      <div mt-6 flex justify-center content-center>
+        <WButtom class="!text-3xl" bg-black color-white content="-" @click="handleZoomOut" />
+        <input
+          ref="range"
+          @input="handleInput"
+          @Change="handleChange"
+          class="range-input"
+          type="range"
+          min="0.1"
+          max="5"
+          step="0.1"
+          defaultValue="1"
+        />
+        <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
+      </div>
 
-  <div  absolute bottom-10px left-20px  w-auto h-20px color-white  font-bold inline>
-    <!-- <h1>Hello world {{ x }} {{ y }}
+      <div absolute bottom-10px left-20px w-auto h-20px color-white font-bold inline>
+        <!-- <h1>Hello world {{ x }} {{ y }}
       {{ isOutside }}</h1> -->
-      <p inline text-lg text-color-zinc-400>  Width: </p> <p inline>{{  Math.floor(width) }} px </p> &nbsp;
-      <p inline text-lg text-color-zinc-400>  Height: </p><p inline>{{  Math.floor(height) }} px </p>
-  
-
-</div>
-  </div>
-  <popOut v-if="isOpen"    @action-close="isOpen = !isOpen"/>
-</main>
+        <p inline text-lg text-color-zinc-400>Width:</p>
+        <p inline>{{ Math.floor(width) }} px</p>
+        &nbsp;
+        <p inline text-lg text-color-zinc-400>Height:</p>
+        <p inline>{{ Math.floor(height) }} px</p>
+      </div>
+    </div>
+    <popOut v-if="isOpen" @action-close="isOpen = !isOpen" />
+  </main>
 </template>
 <style>
-.myContainer {
-  position: relative;
-  user-select: none;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
 .img2 {
   clip-path: inset(0 0 0 var(--liner));
 }
