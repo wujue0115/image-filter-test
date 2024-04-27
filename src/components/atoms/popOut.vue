@@ -2,13 +2,14 @@
 import MySvg from './mySvg.vue'
 
 const isPro = ref(true)
+const isClick =ref(null)
 </script>
 
 <template>
-  <div text-white z-999 absolute right-0 left-0 top-0 bottom-0 class="bg-slate-300/50" font-bold>
+  <div text-white z-999 absolute right-0 left-0 top-0 bottom-0 class="bg-slate-300/50" >
     <div w-full h-full flex flex-row justify-center items-center>
       <div  flex flex-row justify-center items-center bg-white rounded-3xl >
-        <div relative class="myImg" >
+        <div relative class="myImg" h-95vh w-350px  overflow-hidden rounded-l-3xl>
           <svg
             @click="$emit('actionClose')"
             absolute
@@ -26,7 +27,7 @@ const isPro = ref(true)
             between
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
-          <img src="/src/assets/afterE.png" w-300px min-h-96>
+          <!-- <img src="/src/assets/afterE.png" w-300px min-h-96> -->
         </div>
 
         <div flex flex-col  pt-10 mx-5 >
@@ -111,23 +112,23 @@ const isPro = ref(true)
             </div>
             <hr class="w-full" m-auto />
           </div>
-          <div px-5 my-3 flex flex-col justify-center items-center text-black>
-            <div mb-3 v-if="!isPro" w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p> 每年| <span>$1,1190.00</span></p> <p>只要 <span>$22.88 / 週</span></p> </div>
+          <div px-5 my-3 flex flex-col justify-center items-center text-black text-xs>
+            <div @click="isClick = 1" cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 1 }" mb-3 v-if="!isPro" w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$1,190.00</span></p> <p>只要 <span>$22.88 / 週</span></p> </div>
 
-            <div  mb-3   v-else w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p> 每年| <span>$2,590.00</span></p> <p>只要 <span>$49.81 / 週</span></p> </div>
+            <div @click="isClick = 2" cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 2 }"  mb-3   v-else w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$2,590.00</span></p> <p>只要 <span>$49.81 / 週</span></p> </div>
 
            
 
-            <div v-if="!isPro"  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p> 每週| <span>$150.00</span></p> <p>只要 <span>$150 / 週</span></p> </div>
+            <div  @click="isClick = 3"  cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 3 }" v-if="!isPro"  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$150.00</span></p> <p>只要 <span>$150 / 週</span></p> </div>
 
-            <div v-else  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p> 每週| <span>$320.00</span></p> <p>只要 <span>$320 / 週</span></p> </div>
+            <div  @click="isClick = 4"  cursor-pointer hover:border-color-black  :class="{ 'border-color-black': isClick == 4 }" v-else  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$320.00</span></p> <p>只要 <span>$320 / 週</span></p> </div>
           </div>
 
           <!-- <div m-2 flex flex-col justify-center items-center v-else>
               <img src="../assets/ProYear.png"  max-w-md btn-base bg-white alt="" />
               <img src="../assets/ProMonth.png" max-w-md  btn-base bg-white alt="" />
             </div> -->
-          <div  mb-5 flex justify-around>
+          <div  mb-5 mt-2 flex justify-around>
             <WButtom
               :content="'繼續'"
               @click="handleClick('A')"
@@ -152,5 +153,10 @@ const isPro = ref(true)
 </template>
 
 <style>
+.myImg{
+  background-image:url('/src/assets/afterE.png');
+  background-size: cover;
+  background-position: center bottom;
+}
 
 </style>
