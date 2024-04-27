@@ -3,7 +3,7 @@ const isPro = ref(true)
 </script>
 
 <template>
-    <div h-full text-white absolute class="left-30% top-2%" z-999>
+      <div text-white  z-999 absolute right-0 left-0 top-0 bottom-0 class="bg-slate-300/50">
       <div flex flex-col justify-center items-center box-border w-full h-full>
         <div rounded-3xl bg-white>
           <div  relative class="myImg"  w-530px  min-h-52  @click="$emit('actionClose')">
@@ -77,6 +77,5 @@ const isPro = ref(true)
   background-position: center top;
   background-size: cover;
   background-image: url( ../../assets/endBg.png);
-
 }
 </style>
