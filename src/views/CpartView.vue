@@ -10,9 +10,7 @@ const isOpen = ref(false)
 const myWidth = ref(null)
 onMounted(() => {
   console.log(route.query)
-
   src.value = route.query.image as string
-
   panzoom.value = usePanzoom(panzoomRef.value!)
   myWidth.value = useMyWindowSize(myWidth)
 })

@@ -6,30 +6,22 @@ const panzoomRef = ref<HTMLElement | null>(null)
 const range = ref<HTMLInputElement>(null)
 const panzoom = ref<any>(null)
 const isOpen = ref(false)
+const myWidth = ref(null)
 onMounted(() => {
-  console.log(route.query)
-
-  src.value = route.query.image as string
-
-  panzoom.value = usePanzoom(panzoomRef.value!)
-
-  
+  myWidth.value = useMyWindowSize(myWidth)
 })
 
 const handleZoomIn = () => {
   panzoom.value.zoomIn()
-  // console.log(panzoom.value.getScale());
   range.value.valueAsNumber = panzoom.value.getScale()
 }
 
 const handleZoomOut = () => {
   panzoom.value.zoomOut()
-  // range.value.current = panzoom.getScale() + ''
   range.value.valueAsNumber = panzoom.value.getScale()
 }
 const handleInput = (e) => {
   // console.log(e);
-  // panzoom.value.reset()
   panzoom.value.zoom(e.target.valueAsNumber)
 }
 const handleChange = (e) => {
@@ -43,22 +35,20 @@ const handleClick =  () => {
 
 // 滑桿功能
 import { ref } from 'vue'
-import { useElementSize, useMouseInElement } from '@vueuse/core'
+import { useElementSize, useMouseInElement, useDraggable } from '@vueuse/core'
+import DownloadButtom from '@/components/atoms/DownloadButtom.vue';
 const target = ref(null)
 const mouse = reactive(useMouseInElement(target))
 const el = ref(null)
-// const el2 = ref(null)
+const initialX = computed(() => {
+  return myWidth.value/2
+})
 
 const { width, height } = useElementSize(el)
-// const { x, y, isOutside, elementX } = useMouseInElement(target)
 
 const elLine = ref<HTMLElement | null>(null)
-  import { useDraggable } from '@vueuse/core'
-import DownloadButtom from '@/components/atoms/DownloadButtom.vue';
-// const elLine = ref<HTMLElement | null>(null)
-// `style` will be a helper computed for `left: ?px; top: ?px;`
 const { x, y, style } = useDraggable(elLine, {
-  initialValue: { x: 600, y:64 },
+  initialValue: { x: initialX, y:64 },
 })
 
 
@@ -69,22 +59,21 @@ const { x, y, style } = useDraggable(elLine, {
       <DownloadButtom  @click="isOpen = !isOpen"/>
       
   <div ref="target" pt-4 flex flex-col justify-center items-center class=" h-[90%] myContainer"  >
+    
     <div ref="elLine" class="!top-64px"  :style="style" fixed bg-red z-100  w-auto h="75vh" cursor-pointer>
       <img src="../assets/svg4.svg" cursor-pointer absolute class="bottom-[20%] right-[-15px]" w-30px h-30px >
       <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="right-55%">before</button>
-      <!-- <hr width="1px" h-full/> -->
       <div class="line"></div>
       <button border-0 rounded-3xl bg-black color-white py-2 px-5 absolute mx-5 top-15 class="left-45%">after</button>
     </div>
 
     <div>
       
-      <div ref="panzoomRef" class="frame wrapper">
-        <img src="../assets/home.jpg" alt="" class="img1"  ref="el"  />
+      <div ref="panzoomRef" class="frame wrapper ">
+        <img src="../assets/demo.png" alt="" class="img1"  ref="el"  />
        
-        <!-- <div class="line" :style="{left: x - width/2 + 'px', transform: `translateX(${width}px)`}"></div> -->
         <div class="wrapper frame" >
-        <img class="img2 !left-auto" src="../assets/home.jpg" :style="{transform: `translateX(${-width/2}px)` ,width: width - x + width/2 + 120 +'px' , maxWidth: width + 'px'}"> 
+        <img class="img2" src="https://fakeimg.pl/2880x2160/E0E0E0/000"  :style="{ '--liner': (x * 100) / myWidth + '%' }"> 
           
         </div>
       </div>
@@ -123,37 +112,12 @@ const { x, y, style } = useDraggable(elLine, {
 <style>
 .myContainer {
   position: relative;
- 
   user-select: none;
   border-radius: 5px;
   overflow: hidden;
 }
 
-.line {
-  position: absolute;
-  z-index: 1;
-  width: 2px;
-  height: 100%;
-  left: 30%;
-  background: #fff;
-  cursor: pointer;
-}
-
-.wrapper {
-  img {
-    position: absolute;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.img1 {
-  width: 30%;
-  object-position: left;
-}
-
 .img2 {
-  object-position:center;
-  object-fit: contain;
+  clip-path: inset(0 0 0 var(--liner));
 }
 </style>

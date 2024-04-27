@@ -6,7 +6,7 @@ onMounted(() => {
   myWidth.value = useMyWindowSize(myWidth)
 })
 // 滑桿功能
-import { useElementSize, useDraggable } from '@vueuse/core'
+import { useDraggable } from '@vueuse/core'
 const target = ref(null)
 const elLine = ref<HTMLElement | null>(null)
 const initialX = computed(() => {
@@ -22,9 +22,9 @@ const { x, y, style } = useDraggable(elLine, {
     <div flex flex-col justify-center items-center box-border w-auto h-full>
       <div rounded-2xl bg-white>
         <div
-          ref="target el"
+          ref="target"
           relative
-          class="myImg h-88 w-96"
+          class="EpartImg h-88 w-96"
           :style="{ '--liner': (x * 100) / myWidth + '%' }"
         >
           <div
@@ -98,8 +98,8 @@ const { x, y, style } = useDraggable(elLine, {
 </template>
 
 <style scoped>
-.myImg:before,
-.myImg:after {
+.EpartImg:before,
+.EpartImg:after {
   background-position: 50% 20%;
   content: '';
   position: absolute;
@@ -110,13 +110,13 @@ const { x, y, style } = useDraggable(elLine, {
   background-image: url(../assets/beforeE.png);
   background-size: cover;
 }
-.myImg:before {
+.EpartImg:before {
   background-image: url(../assets/beforeE.png);
 }
-.myImg:after {
+.EpartImg:after {
   background-image: url(../assets/afterE.png);
 }
-.myImg::after {
+.EpartImg::after {
   clip-path: inset(0 0 0 var(--liner));
 }
 
