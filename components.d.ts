@@ -7,8 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/atoms/mySvg copy.vue')['default']
     DownloadButtom: typeof import('./src/components/atoms/DownloadButtom.vue')['default']
+    LockSvg: typeof import('./src/components/atoms/lockSvg.vue')['default']
     MySvg: typeof import('./src/components/atoms/mySvg.vue')['default']
+    OkSvg: typeof import('./src/components/atoms/okSvg.vue')['default']
     PopOut: typeof import('./src/components/atoms/popOut.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

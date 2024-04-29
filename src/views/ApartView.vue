@@ -36,14 +36,14 @@ import DownloadButtom from '@/components/atoms/DownloadButtom.vue'
 const target = ref(null)
 const el = ref(null)
 const initialX = computed(() => {
-  return myWidth.value / 2
+  return myWidth.value / 2 + width.value/4
 })
 
 const { width, height } = useElementSize(el)
 
 const elLine = ref<HTMLElement | null>(null)
 const { x, y, style } = useDraggable(elLine, {
-  initialValue: { x: initialX, y: 64 }
+  initialValue: { x: initialX , y: 64 }
 })
 </script>
 
@@ -132,13 +132,11 @@ const { x, y, style } = useDraggable(elLine, {
         <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
       </div>
 
-      <div absolute bottom-10px left-20px w-auto h-20px color-white font-bold inline>
-        <!-- <h1>Hello world {{ x }} {{ y }}
-      {{ isOutside }}</h1> -->
-        <p inline text-lg text-color-zinc-400>Width:</p>
+      <div absolute bottom-10px left-50px w-auto h-20px color-white font-bold inline>
+        <p inline text-lg text-color-zinc-400>Width: </p>
         <p inline>{{ Math.floor(width) }} px</p>
         &nbsp;
-        <p inline text-lg text-color-zinc-400>Height:</p>
+        <p inline text-lg text-color-zinc-400>Height: </p>
         <p inline>{{ Math.floor(height) }} px</p>
       </div>
     </div>

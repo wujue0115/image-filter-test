@@ -119,7 +119,6 @@ const { x, y, style } = useDraggable(elLine, {
 .EpartImg::after {
   clip-path: inset(0 0 0 var(--liner));
 }
-
 img.img2 {
   object-position: right;
   object-fit: cover;
