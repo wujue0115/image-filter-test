@@ -29,17 +29,19 @@ const handleClick = async (type) => {
     const { filterImage } = useReminiStore()
 
     const res = await filterImage(imageFile)
-    if(res.outputURL.length > 0){
+    if(res){
       router.push({
     name: `${type}part`
     // params: name
 })
     }else{
       window.alert('上傳失敗，請重新上傳一次')
+      router.push({
+      name: `${type}part`
+    // params: name
+})
     }
     console.warn(res)
-     
-   
   }
 
 }
