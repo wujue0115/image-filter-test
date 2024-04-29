@@ -50,6 +50,9 @@ watch(x, (newValue, oldValue) => {
   }
 })
 
+const AdjustedWidth = computed(() => {
+  return (myWidth.value - width.value)/2
+})
 </script>
 
 <template>
@@ -112,11 +115,10 @@ watch(x, (newValue, oldValue) => {
         <div ref="panzoomRef" class="frame wrapper">
           <img src="../assets/demo.png" alt="" class="img1" ref="el" />
 
-          <div class="wrapper frame">
+          <div class="wrapper frame" :style="{ '--liner': (x - AdjustedWidth) / width * 100 + '%' }">
             <img
               class="img2"
               src="https://fakeimg.pl/2880x2160/E0E0E0/000"
-              :style="{ '--liner': (x * 100) / myWidth + '%' }"
             />
           </div>
         </div>

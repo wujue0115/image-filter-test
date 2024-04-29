@@ -46,6 +46,10 @@ const elLine = ref<HTMLElement | null>(null)
 const { x, y, style } = useDraggable(elLine, {
   initialValue: { x: initialX, y: 64 }
 })
+
+const AdjustedWidth = computed(() => {
+  return (myWidth.value - width.value)/2
+})
 </script>
 
 
@@ -108,10 +112,14 @@ const { x, y, style } = useDraggable(elLine, {
         <div ref="panzoomRef" class="frame wrapper">
           <img src="../assets/demo.png" alt="" class="img1" ref="el" />
 
-          <div class="wrapper frame  watermarked"  :style="{ '--liner': (x * 100) / myWidth + '%' }">
+          <div class="wrapper frame "  :style="{ '--liner': (x - AdjustedWidth) / width * 100 + '%' }">
             <img
               class="img2 "
-              src="https://fakeimg.pl/2880x2160/E0E0E0/000"
+              src="https://fakeimg.pl/2880x2160/0369a1/000"
+            />
+            <img
+              class="img2 "
+              src="../assets/watermark.png"
             />
           </div>
         </div>
@@ -151,4 +159,5 @@ const { x, y, style } = useDraggable(elLine, {
 .watermarked:after {
   clip-path: inset(0 0 0 var(--liner));
 }
+
 </style>
