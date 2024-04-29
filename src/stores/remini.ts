@@ -3,7 +3,6 @@ import type { FetcherResponse } from '@/composables/fetcher/useFetcher'
 export const useReminiStore = defineStore('remini', () => {
   const { api } = useAPI()
   const filterImageURL = ref<string | null>(null)
-
   const updateFilterImageURL = (url: string) => {
     filterImageURL.value = url
   }
@@ -25,7 +24,7 @@ export const useReminiStore = defineStore('remini', () => {
       if (import.meta.env.DEV) {
         return testFilterImage()
       }
-
+      
       const formData = new FormData()
       formData.append('image', file)
       const response = (await api.post('/filter', {
@@ -42,7 +41,7 @@ export const useReminiStore = defineStore('remini', () => {
     }
   }
 
-  return {
-    filterImage
+  return { 
+  filterImage, filterImageURL
   }
 })

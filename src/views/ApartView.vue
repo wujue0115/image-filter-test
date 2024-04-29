@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 const route = useRoute()
+
+const store = useReminiStore()
+console.log(store.filterImageURL)
+
+
+
 // 放大縮小功能
 const src = ref<string>('null')
 const panzoomRef = ref<HTMLElement | null>(null)
@@ -111,8 +117,14 @@ const AdjustedWidth = computed(() => {
 
           <div class="wrapper frame"  :style="{ '--liner': (x - AdjustedWidth) / width * 100 + '%' }">
             <img
+            v-if="store.filterImageURL !== null"
               class="img2"
-              src="https://fakeimg.pl/2880x2160/E0E0E0/000"
+              :src="store.filterImageURL"
+            />
+            <img
+            v-else
+              class="img2"
+              src="../assets/demo.png"
             />
           </div>
         </div>

@@ -29,15 +29,18 @@ const handleClick = async (type) => {
     const { filterImage } = useReminiStore()
 
     const res = await filterImage(imageFile)
-
-    console.warn(res)
-     router.push({
-    name: `${type}part`,
+    if(res.outputURL.length > 0){
+      router.push({
+    name: `${type}part`
     // params: name
 })
+    }else{
+      window.alert('上傳失敗，請重新上傳一次')
+    }
+    console.warn(res)
+     
    
   }
-  
 
 }
 </script>
@@ -49,7 +52,7 @@ const handleClick = async (type) => {
     <div flex h-full text-white>
       <div flex flex-col justify-center items-center ml="[40%]" box-border w-full h-full>
         <div w-450px flex flex-col justify-center items-center>
-          <h2 text-center text-5xl>AI photo enhancer, <Br/>
+          <h2 text-center text-5xl>AI photo enhancer, <br/>
             in one click</h2>
           <p mt-3 text-lg text-gray-100>
             Only JPG file accepted
