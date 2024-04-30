@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const route = useRoute()
+const store = useReminiStore()
+
 // 放大縮小功能
 const src = ref<string>('null')
 const panzoomRef = ref<HTMLElement | null>(null)
@@ -33,7 +35,7 @@ import { useElementSize, useDraggable } from '@vueuse/core'
 const target = ref(null)
 const el = ref(null)
 const initialX = computed(() => {
-  return myWidth.value/2 + 100
+  return myWidth.value / 2 + width.value/4
 })
 const { width, height } = useElementSize(el)
 
@@ -44,12 +46,15 @@ const { x, y, style } = useDraggable(elLine, {
 
 // 偵測滑到畫面一半
 watch(x, (newValue, oldValue) => {
-  if (x.value < myWidth.value/2 - 100) {
+  if (x.value < myWidth.value/2) {
     isOpen.value = true
-    x.value = myWidth.value/2 + 100
+    x.value = myWidth.value/2 
   }
 })
 
+const AdjustedWidth = computed(() => {
+  return (myWidth.value - width.value)/2
+})
 </script>
 
 <template>
@@ -110,13 +115,19 @@ watch(x, (newValue, oldValue) => {
 
       <div>
         <div ref="panzoomRef" class="frame wrapper">
-          <img src="../assets/demo.png" alt="" class="img1" ref="el" />
+          <img v-if="store.originImageURL" :src="store.originImageURL.value" alt="" class="img1" ref="el" />
+          <img v-else src="../assets/demo.png" alt="" class="img1" ref="el" />
 
-          <div class="wrapper frame">
+          <div class="wrapper frame" :style="{ '--liner': (x - AdjustedWidth) / width * 100 + '%' }">
             <img
+            v-if="store.filterImageURL !== null"
               class="img2"
-              src="https://fakeimg.pl/2880x2160/E0E0E0/000"
-              :style="{ '--liner': (x * 100) / myWidth + '%' }"
+              :src="store.filterImageURL"
+            />
+            <img
+            v-else
+              class="img2"
+              src="../assets/demo.png"
             />
           </div>
         </div>
@@ -138,13 +149,11 @@ watch(x, (newValue, oldValue) => {
         <WButtom class="!text-3xl" bg-black color-white content="+" @click="handleZoomIn" />
       </div>
 
-      <div absolute bottom-10px left-20px w-auto h-20px color-white font-bold inline>
-        <!-- <h1>Hello world {{ x }} {{ y }}
-      {{ isOutside }}</h1> -->
-        <p inline text-lg text-color-zinc-400>Width:</p>
+      <div absolute bottom-10px left-50px w-auto h-20px color-white font-bold inline>
+        <p inline text-lg text-color-zinc-400>Width: </p>
         <p inline>{{ Math.floor(width) }} px</p>
         &nbsp;
-        <p inline text-lg text-color-zinc-400>Height:</p>
+        <p inline text-lg text-color-zinc-400>Height: </p>
         <p inline>{{ Math.floor(height) }} px</p>
       </div>
     </div>

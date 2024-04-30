@@ -15,6 +15,9 @@ const initialX = computed(() => {
 const { x, y, style } = useDraggable(elLine, {
   initialValue: { x: initialX, y: 30 }
 })
+const AdjustedWidth = computed(() => {
+  return (myWidth.value - 384)/2
+})
 </script>
 
 <template>
@@ -25,8 +28,7 @@ const { x, y, style } = useDraggable(elLine, {
           ref="target"
           relative
           class="EpartImg h-88 w-96"
-          :style="{ '--liner': (x * 100) / myWidth + '%' }"
-        >
+          :style="{ '--liner': (x - AdjustedWidth) / 384 * 100 + '%' }">
           <div
             ref="elLine"
             class="!top-58px"
@@ -119,7 +121,6 @@ const { x, y, style } = useDraggable(elLine, {
 .EpartImg::after {
   clip-path: inset(0 0 0 var(--liner));
 }
-
 img.img2 {
   object-position: right;
   object-fit: cover;

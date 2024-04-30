@@ -3,7 +3,11 @@ import type { FetcherResponse } from '@/composables/fetcher/useFetcher'
 export const useReminiStore = defineStore('remini', () => {
   const { api } = useAPI()
   const filterImageURL = ref<string | null>(null)
-
+  const originImageURL = ref<string | null>(null)
+  
+  const updateOriginImageURL = (url: string) => {
+    originImageURL.value = url
+  }
   const updateFilterImageURL = (url: string) => {
     filterImageURL.value = url
   }
@@ -22,10 +26,10 @@ export const useReminiStore = defineStore('remini', () => {
   const filterImage = async (file: File, isNeedMutate = true) => {
     try {
       // 測試用，模擬 API 回傳
-      if (import.meta.env.DEV) {
-        return testFilterImage()
+      if (import.meta.env.PROD) {
+        return updateFilterImageURL('https://fakeimg.pl/2880x2160/?retina=1&text=過濾後&font=noto')
       }
-
+      
       const formData = new FormData()
       formData.append('image', file)
       const response = (await api.post('/filter', {
@@ -42,7 +46,7 @@ export const useReminiStore = defineStore('remini', () => {
     }
   }
 
-  return {
-    filterImage
+  return { 
+  filterImage, filterImageURL, updateOriginImageURL, originImageURL
   }
 })
