@@ -65,7 +65,7 @@ const ScaleAdjustedWidth = computed(() => {
 })
 
 const AdjustedWidth = computed(() => {
-  return left.value + nowWidth.value  - ScaleAdjustedWidth.value
+  return left.value + nowWidth.value * nowScale.value  - ScaleAdjustedWidth.value
 })
 
 const initialX = computed(() => {
