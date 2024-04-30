@@ -175,7 +175,7 @@ const { x, y, style } = useDraggable(elLine, {
       <div absolute bottom-10px left-50px w-auto h-20px color-white font-bold inline>
         <p inline text-lg text-color-zinc-400>Width: </p>
         <p inline>{{ Math.floor(width) }} px</p>
-        &nbsp; {{ left }}  {{ nowWidth }} {{ nowScale}}
+        &nbsp;
         <p inline text-lg text-color-zinc-400>Height: </p>
         <p inline>{{ Math.floor(height) }} px</p>
       </div>
