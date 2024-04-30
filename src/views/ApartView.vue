@@ -10,7 +10,7 @@ const panzoom = ref<any>(null)
 const isOpen = ref(false)
 const myWidth = ref(null)
 const nowWidth = ref(null)
-const nowScale = ref(null)
+const nowScale = ref(1)
 onMounted(() => {
   src.value = route.query.image as string
   panzoom.value = usePanzoom(panzoomRef.value!)
@@ -61,11 +61,11 @@ const { left, width, height }= useElementBounding(el)
 //   return left.value + nowWidth.value
 // })
 const ScaleAdjustedWidth = computed(() => {
-  return (514 * ( nowScale.value - 1 )) / 2
+  return width.value * ( nowScale.value - 1 ) /2
 })
 
 const AdjustedWidth = computed(() => {
-  return left.value + nowWidth.value 
+  return left.value + nowWidth.value  - ScaleAdjustedWidth.value
 })
 
 const initialX = computed(() => {
@@ -141,7 +141,7 @@ const { x, y, style } = useDraggable(elLine, {
           <img v-if="store.originImageURL" :src="store.originImageURL.value" alt="" class="img1" ref="el" />
           <img v-else src="../assets/demo.png" alt="" class="img1" ref="el" />
 
-          <div class="wrapper frame"  :style="{ '--liner': (x - AdjustedWidth) / width  * 100 + '%' }">
+          <div class="wrapper frame"  :style="{ '--liner': (x - AdjustedWidth) / width / nowScale  * 100 + '%' }">
             <img
             v-if="store.filterImageURL !== null"
               class="img2"
@@ -175,7 +175,7 @@ const { x, y, style } = useDraggable(elLine, {
       <div absolute bottom-10px left-50px w-auto h-20px color-white font-bold inline>
         <p inline text-lg text-color-zinc-400>Width: </p>
         <p inline>{{ Math.floor(width) }} px</p>
-        &nbsp; {{ left }}  {{ nowWidth }}
+        &nbsp; {{ left }}  {{ nowWidth }} {{ nowScale}}
         <p inline text-lg text-color-zinc-400>Height: </p>
         <p inline>{{ Math.floor(height) }} px</p>
       </div>
