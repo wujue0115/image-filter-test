@@ -26,7 +26,7 @@ export const useReminiStore = defineStore('remini', () => {
   const filterImage = async (file: File, isNeedMutate = true) => {
     try {
       // 測試用，模擬 API 回傳
-      if (import.meta.env.DEV) {
+      if (import.meta.env.PROD) {
         return updateFilterImageURL('https://fakeimg.pl/2880x2160/?retina=1&text=過濾後&font=noto')
       }
       

@@ -2,7 +2,7 @@
 import okSvg from './okSvg.vue'
 
 const isPro = ref(true)
-const isClick =ref(null)
+const isClick = ref(null)
 </script>
 
 <template>
@@ -118,15 +118,15 @@ const isClick =ref(null)
             <hr class="w-full" m-auto />
           </div>
           <div px-5 my-3 flex flex-col justify-center items-center text-black text-xs>
-            <div @click="isClick = 1" cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 1 }" mb-3 v-if="!isPro" w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$1,190.00</span></p> <p>只要 <span>$22.88 / 週</span></p> </div>
+            <div @click="isClick = '1'" cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick == '1' }" mb-3 v-if="!isPro" w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$1,190.00</span></p> <p>只要 <span>$22.88 / 週</span></p> </div>
 
-            <div @click="isClick = 2" cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 2 }"  mb-3   v-else w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$2,590.00</span></p> <p>只要 <span>$49.81 / 週</span></p> </div>
+            <div @click="isClick = '2'" cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick === '2' }"  mb-3   v-else w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$2,590.00</span></p> <p>只要 <span>$49.81 / 週</span></p> </div>
 
            
 
-            <div  @click="isClick = 3"  cursor-pointer hover:border-color-black :class="{ 'border-color-black': isClick == 3 }" v-if="!isPro"  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$150.00</span></p> <p>只要 <span>$150 / 週</span></p> </div>
+            <div  @click="isClick = '3'"  cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick === '3' }" v-if="!isPro"  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$150.00</span></p> <p>只要 <span>$150 / 週</span></p> </div>
 
-            <div  @click="isClick = 4"  cursor-pointer hover:border-color-black  :class="{ 'border-color-black': isClick == 4 }" v-else  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$320.00</span></p> <p>只要 <span>$320 / 週</span></p> </div>
+            <div  @click="isClick = '4'"  cursor-pointer hover:border-color-black  :class="{ '!border-color-black': isClick === '4' }" v-else  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$320.00</span></p> <p>只要 <span>$320 / 週</span></p> </div>
           </div>
 
           <!-- <div m-2 flex flex-col justify-center items-center v-else>
