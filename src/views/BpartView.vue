@@ -143,7 +143,7 @@ const { x, y, style } = useDraggable(elLine, {
             <img
             v-else
               class="img2"
-              src="../assets/demo2.png"
+              src="../assets/enhanced.jpg"
             />
             <img
               class="img2 "
