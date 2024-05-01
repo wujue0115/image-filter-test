@@ -1,23 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const myWidth = ref(null)
+const myHeight = ref(null)
 const isOpen = ref(false)
 onMounted(() => {
-  myWidth.value = useMyWindowSize(myWidth)
+  myWidth.value = useMyWindowSize().myWidth
+  myHeight.value = useMyWindowSize().myHeight
 })
 // 滑桿功能
 import { useDraggable } from '@vueuse/core'
 const target = ref(null)
 const elLine = ref<HTMLElement | null>(null)
+  const initialY = computed(() => {
+  return ( 0.3 * myHeight.value - 84)/2
+})
 const initialX = computed(() => {
   return myWidth.value / 2
 })
+
 const { x, y, style } = useDraggable(elLine, {
-  initialValue: { x: initialX, y: 30 }
+  initialValue: { x: initialX, y: initialY },
+  axis: 'x'
 })
 const AdjustedWidth = computed(() => {
-  return (myWidth.value - 384)/2
+  return (myWidth.value - myWidth.value*0.45)/2
 })
+console.log(myWidth);
+console.log(myHeight);
+
+
 </script>
 
 <template>
@@ -27,27 +38,27 @@ const AdjustedWidth = computed(() => {
         <div
           ref="target"
           relative
-          class="EpartImg h-88 w-96"
-          :style="{ '--liner': (x - AdjustedWidth) / 384 * 100 + '%' }">
+          class="EpartImg h-70vh w-45vw"
+          :style="{ '--liner': (x - AdjustedWidth) / myWidth / 0.45 * 100 + '%' }">
           <div
             ref="elLine"
-            class="!top-58px"
+            class="dragSvg"
             :style="style"
             fixed
             bg-red
             z-100
             w-auto
-            h="65vh"
+            h="70vh"
             cursor-pointer
           >
-            <img
+            <!-- <img
               src="../assets/svg4.svg"
               cursor-pointer
               absolute
-              class="bottom-[20%] right-[-15px]"
-              w-30px
-              h-30px
-            />
+              class="bottom-[20%] right-[-20px]"
+              w-40px
+              h-40px
+            /> -->
             <button
               border-0
               rounded-3xl

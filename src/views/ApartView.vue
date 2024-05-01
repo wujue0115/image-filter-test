@@ -14,7 +14,7 @@ const nowScale = ref(1)
 onMounted(() => {
   src.value = route.query.image as string
   panzoom.value = usePanzoom(panzoomRef.value!)
-  myWidth.value = useMyWindowSize(myWidth)
+  myWidth.value = useMyWindowSize().myWidth
 })
 
 const handleZoomIn = () => {
@@ -57,9 +57,7 @@ import DownloadButtom from '@/components/atoms/DownloadButtom.vue'
 const el = ref(null)
 const target = ref(null)
 const { left, width, height }= useElementBounding(el)
-// const AdjustedWidth = computed(() => {
-//   return left.value + nowWidth.value
-// })
+
 const ScaleAdjustedWidth = computed(() => {
   return width.value * ( nowScale.value - 1 ) /2
 })
@@ -74,7 +72,8 @@ const initialX = computed(() => {
 
 const elLine = ref<HTMLElement | null>(null)
 const { x, y, style } = useDraggable(elLine, {
-  initialValue: { x: initialX , y: 64 }
+  initialValue: { x: initialX , y: 64 },
+  axis: 'x'
 })
 
 
@@ -88,7 +87,7 @@ const { x, y, style } = useDraggable(elLine, {
     <div ref="target" pt-4 flex flex-col justify-center items-center class="h-[90%] myContainer" @click="hasClick()">
       <div
         ref="elLine"
-        class="!top-64px"
+        class="dragSvg"
         :style="style"
         fixed
         bg-red
@@ -97,14 +96,14 @@ const { x, y, style } = useDraggable(elLine, {
         h="75vh"
         cursor-pointer
       >
-        <img
+        <!-- <img
           src="../assets/svg4.svg"
           cursor-pointer
           absolute
           class="bottom-[20%] right-[-15px]"
           w-30px
           h-30px
-        />
+        /> -->
         <button
           border-0
           rounded-3xl

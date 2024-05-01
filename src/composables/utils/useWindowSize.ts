@@ -1,8 +1,9 @@
 import { useWindowSize } from '@vueuse/core'
 
-const { width } = useWindowSize()
+const { width,height } = useWindowSize()
 export const useMyWindowSize = () => {
   let myWidth = width.value
+  let myHeight = height.value
 
-  return myWidth
+  return { myWidth, myHeight }
 }

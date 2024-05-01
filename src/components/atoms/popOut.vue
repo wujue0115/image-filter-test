@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import okSvg from './okSvg.vue'
-
+const router = useRouter()
 const isPro = ref(true)
 const isClick = ref(null)
+const handleClick = () => {
+    router.push({
+      name: `part`
+    })
+  }
+
 </script>
 
 <template>
   <div text-white z-999 absolute right-0 left-0 top-0 bottom-0 class="bg-slate-300/50" >
     <div w-full h-full flex flex-row justify-center items-center>
       <div  flex flex-row justify-center items-center bg-white rounded-3xl >
-        <div relative class="myImg" h-95vh w-350px  overflow-hidden rounded-l-3xl :class="{ 'isProBg': isPro}">
+        <div relative class="myImg" h-78vh w-500px  overflow-hidden rounded-l-3xl :class="{ 'isProBg': isPro}">
           <svg
             @click="$emit('actionClose')"
             absolute
@@ -119,13 +125,8 @@ const isClick = ref(null)
           </div>
           <div px-5 my-3 flex flex-col justify-center items-center text-black text-xs>
             <div @click="isClick = '1'" cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick == '1' }" mb-3 v-if="!isPro" w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$1,190.00</span></p> <p>只要 <span>$22.88 / 週</span></p> </div>
-
             <div @click="isClick = '2'" cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick === '2' }"  mb-3   v-else w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每年 | <span class="text-color-gray-500 text-xs">$2,590.00</span></p> <p>只要 <span>$49.81 / 週</span></p> </div>
-
-           
-
             <div  @click="isClick = '3'"  cursor-pointer hover:border-color-black :class="{ '!border-color-black': isClick === '3' }" v-if="!isPro"  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$150.00</span></p> <p>只要 <span>$150 / 週</span></p> </div>
-
             <div  @click="isClick = '4'"  cursor-pointer hover:border-color-black  :class="{ '!border-color-black': isClick === '4' }" v-else  w-full p-3 rounded-full border="2px solid #ddd" flex flex-row justify-between> <p font-black> 每週 | <span class="text-color-gray-500 text-xs">$320.00</span></p> <p>只要 <span>$320 / 週</span></p> </div>
           </div>
 
@@ -136,7 +137,7 @@ const isClick = ref(null)
           <div  mb-5 mt-2 flex justify-around>
             <WButtom
               :content="'繼續'"
-              @click="handleClick('A')"
+              @click="handleClick()"
               type
               w="80px"
               text-center
@@ -144,7 +145,7 @@ const isClick = ref(null)
             ></WButtom>
             <WButtom
               :content="'下次再說'"
-              @click="handleClick('A')"
+              @click="handleClick()"
               type
               w="80px"
               text-center
