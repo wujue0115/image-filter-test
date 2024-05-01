@@ -20,7 +20,6 @@ onMounted(() => {
 const handleZoomIn = () => {
   panzoom.value.zoomIn()
   range.value.valueAsNumber = panzoom.value.getScale()
-  console.log(panzoom.value.getPan());
   nowWidth.value = panzoom.value.getPan().x
   nowScale.value = panzoom.value.getScale()
 }
@@ -28,24 +27,20 @@ const handleZoomIn = () => {
 const handleZoomOut = () => {
   panzoom.value.zoomOut()
   range.value.valueAsNumber = panzoom.value.getScale()
-  console.log(panzoom.value.getPan());
   nowWidth.value = panzoom.value.getPan().x
   nowScale.value = panzoom.value.getScale()
 }
 const handleInput = (e) => {
   panzoom.value.zoom(e.target.valueAsNumber)
-  console.log(panzoom.value.getPan());
   nowWidth.value = panzoom.value.getPan().x
   nowScale.value = panzoom.value.getScale()
 }
 const handleChange = (e) => {
   panzoom.value.zoom(e.target.valueAsNumber)
-  console.log(panzoom.value.getPan());
   nowWidth.value = panzoom.value.getPan().x
   nowScale.value = panzoom.value.getScale()
 }
 const hasClick= (e) => {
-  console.log(panzoom.value.getPan());
   nowWidth.value = panzoom.value.getPan().x
   nowScale.value = panzoom.value.getScale()
 }

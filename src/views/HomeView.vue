@@ -29,6 +29,7 @@ const handleClick = async (type) => {
     const { filterImage, updateOriginImageURL } = useReminiStore()
 
     const res = await filterImage(imageFile)
+    console.log(res); 
 
     // 將origin 圖片保存在pinia中
     // 建立FileReader 監聽 Load 事件
