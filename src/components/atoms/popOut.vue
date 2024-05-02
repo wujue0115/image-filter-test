@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import okSvg from './okSvg.vue'
 const router = useRouter()
-const isPro = ref(true)
-const isClick = ref(null)
+const isPro = ref(false)
+const isClick = ref('1')
 const handleClick = () => {
   window.location = 'https://forms.gle/BNyqBkfDjvMBuNaKA'
 }
