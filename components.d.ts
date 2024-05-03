@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     DownloadButtom: typeof import('./src/components/atoms/DownloadButtom.vue')['default']
+    Loading: typeof import('./src/components/atoms/loading.vue')['default']
     LockSvg: typeof import('./src/components/atoms/lockSvg.vue')['default']
     OkSvg: typeof import('./src/components/atoms/okSvg.vue')['default']
     PopOut: typeof import('./src/components/atoms/popOut.vue')['default']

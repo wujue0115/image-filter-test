@@ -22,31 +22,37 @@ const uploadImage = () => {
     input.click()
   })
 }
+const store = useReminiStore()
+const { isLoading, isError } = storeToRefs(store)
 
 const handleClick = async (type) => {
   const imageFile = await uploadImage()
   if (imageFile instanceof File) {
     const { filterImage, updateOriginImageURL } = useReminiStore()
-
     const res = await filterImage(imageFile)
-
-    // 將origin 圖片保存在pinia中
-    // 建立FileReader 監聽 Load 事件
-    const reader = new FileReader()
-    reader.readAsDataURL(imageFile)
-    reader.onload = function () {
-      image.value = reader.result
+    console.log(res)
+    if (isError.value == true) {
+      window.alert('發生錯誤，請再試一次')
+    } else {
+      // 將origin 圖片保存在pinia中
+      // 建立FileReader 監聽 Load 事件
+      const reader = new FileReader()
+      reader.readAsDataURL(imageFile)
+      reader.onload = function () {
+        image.value = reader.result
+      }
+      await updateOriginImageURL(image)
+      router.push({
+        name: `${type}part`
+      })
     }
-    await updateOriginImageURL(image)
-    router.push({
-      name: `${type}part`
-    })
   }
 }
 </script>
 
 <template>
   <main class="main" relative box-border pt-20 w-full h-100vh font-sans>
+    <loading v-if="isLoading" />
     <div flex h-full text-white>
       <div flex flex-col justify-center items-center ml="[40%]" box-border w-full h-full>
         <div w-450px flex flex-col justify-center items-center>
